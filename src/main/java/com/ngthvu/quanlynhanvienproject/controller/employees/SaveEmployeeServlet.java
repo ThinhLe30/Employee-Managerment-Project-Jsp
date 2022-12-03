@@ -2,14 +2,12 @@ package com.ngthvu.quanlynhanvienproject.controller.employees;
 
 import com.ngthvu.quanlynhanvienproject.entity.Employee;
 import com.ngthvu.quanlynhanvienproject.exception.EmployeeNotFoundException;
-import com.ngthvu.quanlynhanvienproject.service.EmployeeService;
+import com.ngthvu.quanlynhanvienproject.bo.EmployeeBO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,11 +19,11 @@ import java.nio.file.Paths;
 //        maxFileSize=1024*1024*10,      // 10MB
 //        maxRequestSize=1024*1024*50)
 public class SaveEmployeeServlet extends HttpServlet {
-    EmployeeService employeeService;
+    EmployeeBO employeeBO;
 
     @Override
     public void init() throws ServletException {
-        employeeService = new EmployeeService();
+        employeeBO = new EmployeeBO();
     }
 
     @Override
@@ -66,7 +64,7 @@ public class SaveEmployeeServlet extends HttpServlet {
         }
 
         try {
-            employeeService.save(employee);
+            employeeBO.save(employee);
             response.sendRedirect(request.getContextPath()+"/employees");
         } catch (EmployeeNotFoundException e) {
             e.printStackTrace();

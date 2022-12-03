@@ -1,8 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.salaries;
 
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.exception.SalaryNotFoundException;
-import com.ngthvu.quanlynhanvienproject.service.SalaryService;
+import com.ngthvu.quanlynhanvienproject.bo.SalaryBO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,15 +10,15 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteSalaryServlet", value = "/salary/delete")
 public class DeleteSalaryServlet extends HttpServlet {
-    private SalaryService salaryService;
+    private SalaryBO salaryBO;
     public void init(){
-        salaryService = new SalaryService();
+        salaryBO = new SalaryBO();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.parseInt(request.getParameter("id"));
         try {
-            salaryService.delete(id);
+            salaryBO.delete(id);
             response.sendRedirect(request.getContextPath()+"/salaries");
         } catch (SalaryNotFoundException e) {
             request.getRequestDispatcher("/view/error/404.jsp").forward(request,response);

@@ -1,7 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.employees;
 
 import com.ngthvu.quanlynhanvienproject.exception.EmployeeNotFoundException;
-import com.ngthvu.quanlynhanvienproject.service.EmployeeService;
+import com.ngthvu.quanlynhanvienproject.bo.EmployeeBO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -10,18 +10,18 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteEmployeeServlet", value = "/employee/delete")
 public class DeleteEmployeeServlet extends HttpServlet {
-    EmployeeService employeeService;
+    EmployeeBO employeeBO;
     // Controller, contact only with View and Service, do not linked Controller to Repository!
 
     public DeleteEmployeeServlet() {
-        employeeService = new EmployeeService();
+        employeeBO = new EmployeeBO();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            employeeService.delete(id);
+            employeeBO.delete(id);
             response.sendRedirect(request.getContextPath()+"/employees");
         } catch (EmployeeNotFoundException e) {
             e.printStackTrace();

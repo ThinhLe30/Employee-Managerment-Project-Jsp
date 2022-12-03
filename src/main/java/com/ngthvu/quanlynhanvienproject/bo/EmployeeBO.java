@@ -1,31 +1,30 @@
-package com.ngthvu.quanlynhanvienproject.service;
+package com.ngthvu.quanlynhanvienproject.bo;
 
 import com.ngthvu.quanlynhanvienproject.entity.Employee;
 import com.ngthvu.quanlynhanvienproject.entity.EmployeeView;
 import com.ngthvu.quanlynhanvienproject.exception.EmployeeNotFoundException;
-import com.ngthvu.quanlynhanvienproject.repository.EmployeeRepository;
+import com.ngthvu.quanlynhanvienproject.dao.EmployeeDAO;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeService {
+public class EmployeeBO {
     // represent BO, contact with controller and Repository
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeDAO employeeDAO;
 
-    public EmployeeService() {
-        employeeRepository = new EmployeeRepository();
+    public EmployeeBO() {
+        employeeDAO = new EmployeeDAO();
     }
 
     public Integer countByKeyword(String keyword) {
-        return employeeRepository.countByKeyword(keyword);
+        return employeeDAO.countByKeyword(keyword);
     }
 
     public List<EmployeeView> listByPage(Integer start, Integer numberPerPage, String keyword, String fieldName, String orderBy){
-        return employeeRepository.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
+        return employeeDAO.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
     }
     public ArrayList<Employee> getAll() {
-        return employeeRepository.getAll();
+        return employeeDAO.getAll();
     }
 
 //    public ArrayList<EmployeeView> getAllView() {
@@ -33,52 +32,52 @@ public class EmployeeService {
 //    }
 
     public Employee get (int id) throws EmployeeNotFoundException {
-        if (employeeRepository.get(id).getId() == 0) {
+        if (employeeDAO.get(id).getId() == 0) {
             throw new EmployeeNotFoundException("Employee not found with id: " + id);
         }
-        else return employeeRepository.get(id);
+        else return employeeDAO.get(id);
     }
 
     public EmployeeView getView(int id) throws EmployeeNotFoundException {
-        if (employeeRepository.getView(id).getId() == 0) {
+        if (employeeDAO.getView(id).getId() == 0) {
             throw new EmployeeNotFoundException("Employee not found with id: " + id);
         }
-        else return employeeRepository.getView(id);
+        else return employeeDAO.getView(id);
     }
 
     public Employee get(String type, String value) {
-        return employeeRepository.get(type, value);
+        return employeeDAO.get(type, value);
     }
 
     public EmployeeView getView(String type, String value) throws EmployeeNotFoundException {
-        return employeeRepository.getView(type, value);
+        return employeeDAO.getView(type, value);
     }
 
     public void delete(int id) throws EmployeeNotFoundException {
-        if (employeeRepository.get(id).getId() == 0) {
+        if (employeeDAO.get(id).getId() == 0) {
             throw new EmployeeNotFoundException("Employee not found with id: " + id);
         } else {
-            employeeRepository.delete(id);
+            employeeDAO.delete(id);
         }
     }
 
     public ArrayList<Employee> search(String keyword) {
-        return employeeRepository.search(keyword);
+        return employeeDAO.search(keyword);
     }
 
     public String checkDuplicate(int id, String email, String phone) {
-        return employeeRepository.checkDuplicate(id, email, phone);
+        return employeeDAO.checkDuplicate(id, email, phone);
     }
 
     public void save(Employee employee) throws EmployeeNotFoundException {
         System.out.println(employee.getId());
         if(employee.getId() == 0) {
-            employeeRepository.add(employee);
+            employeeDAO.add(employee);
         } else {
-            if (employeeRepository.get(employee.getId()) == null) {
+            if (employeeDAO.get(employee.getId()) == null) {
                 throw new EmployeeNotFoundException("Employee not found with id: " + employee.getId());
             } else {
-                employeeRepository.update(employee);
+                employeeDAO.update(employee);
             }
         }
     }

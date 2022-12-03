@@ -1,35 +1,35 @@
-package com.ngthvu.quanlynhanvienproject.service;
+package com.ngthvu.quanlynhanvienproject.bo;
 
 import com.ngthvu.quanlynhanvienproject.entity.Department;
 import com.ngthvu.quanlynhanvienproject.exception.DepartmentNotFoundException;
-import com.ngthvu.quanlynhanvienproject.repository.DepartmentRepository;
+import com.ngthvu.quanlynhanvienproject.dao.DepartmentDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartmentService {
+public class DepartmentBO {
     // represent BO, contact with controller and Repository
-    private final DepartmentRepository departmentRepository;
+    private final DepartmentDAO departmentDAO;
 
-    public DepartmentService(){
-        departmentRepository = new DepartmentRepository();
+    public DepartmentBO(){
+        departmentDAO = new DepartmentDAO();
     }
     public List<Department> listByPage(Integer start, Integer numberPerPage, String keyword, String fieldName, String orderBy){
-        return departmentRepository.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
+        return departmentDAO.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
     }
     public Integer countByKeyword(String keyword) {
-        return departmentRepository.countByKeyword(keyword);
+        return departmentDAO.countByKeyword(keyword);
     }
     public ArrayList<Department> getAll(){
-        return departmentRepository.getAll();
+        return departmentDAO.getAll();
     }
 
     public ArrayList<Department> search(String keyword){
-        return departmentRepository.search(keyword);
+        return departmentDAO.search(keyword);
     }
 
     public Department get(Integer id) throws DepartmentNotFoundException {
-        Department department = departmentRepository.get(id);
+        Department department = departmentDAO.get(id);
         if(department == null){
             throw new DepartmentNotFoundException("Department not found with id: " + id);
         }
@@ -37,7 +37,7 @@ public class DepartmentService {
     }
 
     public Department get(String type, String value) throws DepartmentNotFoundException {
-        Department department = departmentRepository.get(type, value);
+        Department department = departmentDAO.get(type, value);
         if(department == null){
             throw new DepartmentNotFoundException("Department not found with " + type + " = " + value);
         }
@@ -45,23 +45,23 @@ public class DepartmentService {
     }
 
     public void add(Department department) throws Exception {
-        departmentRepository.add(department);
+        departmentDAO.add(department);
     }
 
     public void update(Department department) throws Exception {
-        departmentRepository.update(department);
+        departmentDAO.update(department);
     }
 
     public void delete(Integer id) throws Exception {
-        departmentRepository.delete(id);
+        departmentDAO.delete(id);
     }
 
     public void save(Department department) throws Exception {
         if(department.getId() == 0){
-            departmentRepository.add(department);
+            departmentDAO.add(department);
         }
         else{
-            departmentRepository.update(department);
+            departmentDAO.update(department);
         }
     }
 }

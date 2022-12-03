@@ -1,11 +1,8 @@
 package com.ngthvu.quanlynhanvienproject.controller.admins;
 
 import com.ngthvu.quanlynhanvienproject.entity.Admin;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.exception.AdminNotFoundException;
-import com.ngthvu.quanlynhanvienproject.exception.SalaryNotFoundException;
-import com.ngthvu.quanlynhanvienproject.service.AdminService;
-import com.ngthvu.quanlynhanvienproject.service.SalaryService;
+import com.ngthvu.quanlynhanvienproject.bo.AdminBO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,15 +13,15 @@ import java.io.IOException;
 
 @WebServlet(name = "EditAdminServlet", value = "/admin/update")
 public class EditAdminServlet extends HttpServlet {
-    private AdminService adminService;
+    private AdminBO adminBO;
     public void init(){
-        adminService = new AdminService();
+        adminBO = new AdminBO();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.parseInt(request.getParameter("id"));
         try {
-            Admin admin = adminService.findById(id);
+            Admin admin = adminBO.findById(id);
             request.setAttribute("admin",admin);
             request.setAttribute("pageTitle","Update Admin");
             request.getRequestDispatcher("/view/admins/admin_form.jsp").forward(request,response);

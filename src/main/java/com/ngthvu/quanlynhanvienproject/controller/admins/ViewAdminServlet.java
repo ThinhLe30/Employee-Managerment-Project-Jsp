@@ -1,9 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.admins;
 
 import com.ngthvu.quanlynhanvienproject.entity.Admin;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
-import com.ngthvu.quanlynhanvienproject.service.AdminService;
-import com.ngthvu.quanlynhanvienproject.service.SalaryService;
+import com.ngthvu.quanlynhanvienproject.bo.AdminBO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,9 +13,9 @@ import java.util.List;
 
 @WebServlet(name = "ViewAdminServlet", value = "/admins")
 public class ViewAdminServlet extends HttpServlet {
-    private AdminService adminService;
+    private AdminBO adminBO;
     public void init(){
-        adminService = new AdminService();
+        adminBO = new AdminBO();
     }
     private static final Integer NUMBER_ADMIN_PER_PAGE = 8;
     @Override
@@ -46,8 +44,8 @@ public class ViewAdminServlet extends HttpServlet {
             start = pageNum;
         }
         String reverseOrderBy = orderBy.equals("asc") ? "desc" : "asc";
-        List<Admin> admins = adminService.listByPage(start,NUMBER_ADMIN_PER_PAGE,keyword,fieldName,orderBy);
-        Integer totalItems = adminService.countByKeyword(keyword); // countByKeyword();
+        List<Admin> admins = adminBO.listByPage(start,NUMBER_ADMIN_PER_PAGE,keyword,fieldName,orderBy);
+        Integer totalItems = adminBO.countByKeyword(keyword); // countByKeyword();
         Integer totalPage = Math.round(totalItems/NUMBER_ADMIN_PER_PAGE)*NUMBER_ADMIN_PER_PAGE < totalItems ? Math.round(totalItems/NUMBER_ADMIN_PER_PAGE)+1 : Math.round(totalItems/NUMBER_ADMIN_PER_PAGE);
         //
         long startCount = (pageNum -1 ) * NUMBER_ADMIN_PER_PAGE +1;

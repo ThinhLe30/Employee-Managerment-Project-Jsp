@@ -1,9 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.admins;
 
 import com.ngthvu.quanlynhanvienproject.entity.Admin;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
-import com.ngthvu.quanlynhanvienproject.service.AdminService;
-import com.ngthvu.quanlynhanvienproject.service.SalaryService;
+import com.ngthvu.quanlynhanvienproject.bo.AdminBO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +12,9 @@ import java.io.IOException;
 
 @WebServlet(name = "SaveAdminServlet", value = "/admin/save")
 public class SaveAdminServlet extends HttpServlet {
-    private AdminService adminService;
+    private AdminBO adminBO;
     public void init(){
-        adminService = new AdminService();
+        adminBO = new AdminBO();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +31,7 @@ public class SaveAdminServlet extends HttpServlet {
         String phone = request.getParameter("phone");
 
         Admin admin = new Admin(id,username,password,first_name,last_name,phone);
-        adminService.save(admin);
+        adminBO.save(admin);
         response.sendRedirect(request.getContextPath()+"/admins");
     }
 }

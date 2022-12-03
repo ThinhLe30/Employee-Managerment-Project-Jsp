@@ -1,8 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.departments;
 
 import com.ngthvu.quanlynhanvienproject.entity.Department;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
-import com.ngthvu.quanlynhanvienproject.service.DepartmentService;
+import com.ngthvu.quanlynhanvienproject.bo.DepartmentBO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,11 +11,11 @@ import java.util.List;
 
 @WebServlet(name = "ViewDepartmentServlet", value = "/departments")
 public class ViewDepartmentServlet extends HttpServlet {
-    DepartmentService departmentService;
+    DepartmentBO departmentBO;
     private static final Integer NUMBER_DEPARTMENT_PER_PAGE = 8;
     @Override
     public void init() throws ServletException {
-        departmentService = new DepartmentService();
+        departmentBO = new DepartmentBO();
     }
 
     @Override
@@ -45,8 +44,8 @@ public class ViewDepartmentServlet extends HttpServlet {
             start = pageNum;
         }
         String reverseOrderBy = orderBy.equals("asc") ? "desc" : "asc";
-        List<Department> departments = departmentService.listByPage(start,NUMBER_DEPARTMENT_PER_PAGE,keyword,fieldName,orderBy);
-        Integer totalItems = departmentService.countByKeyword(keyword); // countByKeyword();
+        List<Department> departments = departmentBO.listByPage(start,NUMBER_DEPARTMENT_PER_PAGE,keyword,fieldName,orderBy);
+        Integer totalItems = departmentBO.countByKeyword(keyword); // countByKeyword();
         Integer totalPage = Math.round(totalItems/NUMBER_DEPARTMENT_PER_PAGE)*NUMBER_DEPARTMENT_PER_PAGE < totalItems ? Math.round(totalItems/NUMBER_DEPARTMENT_PER_PAGE)+1 : Math.round(totalItems/NUMBER_DEPARTMENT_PER_PAGE);
         //
         long startCount = (pageNum -1 ) * NUMBER_DEPARTMENT_PER_PAGE +1;

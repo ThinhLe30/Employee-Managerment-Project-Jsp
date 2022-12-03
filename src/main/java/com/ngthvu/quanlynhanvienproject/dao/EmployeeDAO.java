@@ -1,22 +1,20 @@
-package com.ngthvu.quanlynhanvienproject.repository;
+package com.ngthvu.quanlynhanvienproject.dao;
 
-import com.ngthvu.quanlynhanvienproject.entity.Department;
 import com.ngthvu.quanlynhanvienproject.entity.Employee;
 import com.ngthvu.quanlynhanvienproject.entity.EmployeeView;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.util.DbHelper;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeRepository {
+public class EmployeeDAO {
     // represent DAO, contact with database in MySql,return Entity or List of Entity
     // do not contact from Controller to Repository
     // have to go through Service to Repository
     private final DbHelper dbHelper;
-    private final DepartmentRepository departmentRepository;
-    private final SalaryRepository salaryRepository;
+    private final DepartmentDAO departmentDAO;
+    private final SalaryDAO salaryDAO;
     private static final String GET_ALL_EMPLOYEES =
             "select * from employees";
 
@@ -60,10 +58,10 @@ public class EmployeeRepository {
     private static final String CHECK_DUPLICATE_PHONE =
             "select count(*) as count from employees where phone_number = ?";
 
-    public EmployeeRepository() {
+    public EmployeeDAO() {
         dbHelper = new DbHelper();
-        departmentRepository = new DepartmentRepository();
-        salaryRepository = new SalaryRepository();
+        departmentDAO = new DepartmentDAO();
+        salaryDAO = new SalaryDAO();
     }
 
     public Integer countByKeyword(String keyword) {
@@ -391,12 +389,12 @@ public class EmployeeRepository {
             if(rs.getString("id_department") == null){
                 departmentName = "None";
             }else{
-                departmentName = departmentRepository.get(rs.getInt("id_department")).getName();
+                departmentName = departmentDAO.get(rs.getInt("id_department")).getName();
             }
             if(rs.getString("id_level_salary") == null){
                 basic_salary = 0F;
             }else{
-                basic_salary = salaryRepository.findById(rs.getInt("id_level_salary")).getBasicSalary();
+                basic_salary = salaryDAO.findById(rs.getInt("id_level_salary")).getBasicSalary();
             }
             employeeView.setId(rs.getInt("id"));
             employeeView.setFirstName(rs.getString("first_name"));

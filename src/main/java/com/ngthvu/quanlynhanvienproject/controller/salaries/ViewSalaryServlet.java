@@ -1,7 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.salaries;
 
 import com.ngthvu.quanlynhanvienproject.entity.Salary;
-import com.ngthvu.quanlynhanvienproject.service.SalaryService;
+import com.ngthvu.quanlynhanvienproject.bo.SalaryBO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,9 +11,9 @@ import java.util.List;
 
 @WebServlet(name = "ViewSalaryServlet", value = "/salaries")
 public class ViewSalaryServlet extends HttpServlet {
-    private SalaryService salaryService;
+    private SalaryBO salaryBO;
     public void init(){
-        salaryService = new SalaryService();
+        salaryBO = new SalaryBO();
     }
     private static final Integer NUMBER_SALARY_PER_PAGE = 11;
     @Override
@@ -42,8 +42,8 @@ public class ViewSalaryServlet extends HttpServlet {
             start = pageNum;
         }
         String reverseOrderBy = orderBy.equals("asc") ? "desc" : "asc";
-        List<Salary> salaries = salaryService.listByPage(start,NUMBER_SALARY_PER_PAGE,keyword,fieldName,orderBy);
-        Integer totalItems = salaryService.countByKeyword(keyword); // countByKeyword();
+        List<Salary> salaries = salaryBO.listByPage(start,NUMBER_SALARY_PER_PAGE,keyword,fieldName,orderBy);
+        Integer totalItems = salaryBO.countByKeyword(keyword); // countByKeyword();
         Integer totalPage = Math.round(totalItems/NUMBER_SALARY_PER_PAGE)*NUMBER_SALARY_PER_PAGE < totalItems ? Math.round(totalItems/NUMBER_SALARY_PER_PAGE)+1 : Math.round(totalItems/NUMBER_SALARY_PER_PAGE);
         //
         long startCount = (pageNum -1 ) * NUMBER_SALARY_PER_PAGE +1;

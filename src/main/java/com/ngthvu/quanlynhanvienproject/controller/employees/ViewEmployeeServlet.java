@@ -1,24 +1,21 @@
 package com.ngthvu.quanlynhanvienproject.controller.employees;
 
-import com.ngthvu.quanlynhanvienproject.entity.Employee;
 import com.ngthvu.quanlynhanvienproject.entity.EmployeeView;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
-import com.ngthvu.quanlynhanvienproject.service.EmployeeService;
+import com.ngthvu.quanlynhanvienproject.bo.EmployeeBO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ViewEmployeeServlet", value = "/employees")
 public class ViewEmployeeServlet extends HttpServlet {
-    private EmployeeService employeeService;
+    private EmployeeBO employeeBO;
     private static final Integer NUMBER_EMPLPOYEE_PER_PAGE = 8;
     @Override
     public void init(){
-        employeeService = new EmployeeService();
+        employeeBO = new EmployeeBO();
     }
     // Controller, contact only with View and Service, do not linked Controller to Repository!
     @Override
@@ -48,8 +45,8 @@ public class ViewEmployeeServlet extends HttpServlet {
             start = pageNum;
         }
         String reverseOrderBy = orderBy.equals("asc") ? "desc" : "asc";
-        List<EmployeeView> employees = employeeService.listByPage(start,NUMBER_EMPLPOYEE_PER_PAGE,keyword,fieldName,orderBy);
-        Integer totalItems = employeeService.countByKeyword(keyword); // countByKeyword();
+        List<EmployeeView> employees = employeeBO.listByPage(start,NUMBER_EMPLPOYEE_PER_PAGE,keyword,fieldName,orderBy);
+        Integer totalItems = employeeBO.countByKeyword(keyword); // countByKeyword();
         Integer totalPage = Math.round(totalItems/NUMBER_EMPLPOYEE_PER_PAGE)*NUMBER_EMPLPOYEE_PER_PAGE < totalItems ? Math.round(totalItems/NUMBER_EMPLPOYEE_PER_PAGE)+1 : Math.round(totalItems/NUMBER_EMPLPOYEE_PER_PAGE);
         //
         long startCount = (pageNum -1 ) * NUMBER_EMPLPOYEE_PER_PAGE +1;

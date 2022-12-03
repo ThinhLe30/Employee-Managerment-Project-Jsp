@@ -1,31 +1,31 @@
-package com.ngthvu.quanlynhanvienproject.service;
+package com.ngthvu.quanlynhanvienproject.bo;
 
 import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.exception.SalaryNotFoundException;
-import com.ngthvu.quanlynhanvienproject.repository.SalaryRepository;
+import com.ngthvu.quanlynhanvienproject.dao.SalaryDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SalaryService {
+public class SalaryBO {
     // represent BO, contact with controller and Repository
-    private SalaryRepository salaryRepository;
-    public SalaryService(){
-        salaryRepository = new SalaryRepository();
+    private SalaryDAO salaryDAO;
+    public SalaryBO(){
+        salaryDAO = new SalaryDAO();
     }
 
     public ArrayList<Salary> getAll(){
-        return salaryRepository.findAll();
+        return salaryDAO.findAll();
     }
     public List<Salary> listByPage(Integer start, Integer numberPerPage, String keyword, String fieldName, String orderBy) {
-        return salaryRepository.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
+        return salaryDAO.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
     }
 
     public Integer countByKeyword(String keyword) {
-        return salaryRepository.countByKeyword(keyword);
+        return salaryDAO.countByKeyword(keyword);
     }
     public Salary findById(Integer id) throws SalaryNotFoundException {
-        Salary salary = salaryRepository.findById(id);
+        Salary salary = salaryDAO.findById(id);
         if(salary == null){
             throw new SalaryNotFoundException("Salary not found with id:" + id);
         }
@@ -34,17 +34,17 @@ public class SalaryService {
 
     public void save(Salary salary) {
         if(salary.getId() == 0){
-            salaryRepository.add(salary);
+            salaryDAO.add(salary);
         }
         else{
-            salaryRepository.update(salary);
+            salaryDAO.update(salary);
         }
     }
 
     public void delete(Integer id) throws SalaryNotFoundException {
-        if(salaryRepository.findById(id) == null){
+        if(salaryDAO.findById(id) == null){
             throw new SalaryNotFoundException("Salary not found with id:" + id);
         }
-        salaryRepository.delete(id);
+        salaryDAO.delete(id);
     }
 }

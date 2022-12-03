@@ -1,9 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.admins;
 
 import com.ngthvu.quanlynhanvienproject.exception.AdminNotFoundException;
-import com.ngthvu.quanlynhanvienproject.exception.SalaryNotFoundException;
-import com.ngthvu.quanlynhanvienproject.service.AdminService;
-import com.ngthvu.quanlynhanvienproject.service.SalaryService;
+import com.ngthvu.quanlynhanvienproject.bo.AdminBO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,15 +12,15 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteAdminServlet", value = "/admin/delete")
 public class DeleteAdminServlet extends HttpServlet {
-    private AdminService adminService;
+    private AdminBO adminBO;
     public void init(){
-        adminService = new AdminService();
+        adminBO = new AdminBO();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.parseInt(request.getParameter("id"));
         try {
-            adminService.delete(id);
+            adminBO.delete(id);
             response.sendRedirect(request.getContextPath()+"/admins");
         }catch (AdminNotFoundException e) {
             request.getRequestDispatcher("/view/error/404.jsp").forward(request,response);

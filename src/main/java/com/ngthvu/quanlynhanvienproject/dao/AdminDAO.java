@@ -1,18 +1,15 @@
-package com.ngthvu.quanlynhanvienproject.repository;
+package com.ngthvu.quanlynhanvienproject.dao;
 
 import com.ngthvu.quanlynhanvienproject.entity.Admin;
-import com.ngthvu.quanlynhanvienproject.entity.Employee;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.util.DbHelper;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminRepository {
+public class AdminDAO {
     // represent DAO, contact with database in MySql,return Entity or List of Entity
     // do not contact from Controller to Repository
     // have to go through Service to Repository
@@ -44,7 +41,7 @@ public class AdminRepository {
             "delete from employee_management.admin " +
                     "where id = ?";
 
-    public AdminRepository(){
+    public AdminDAO(){
         dbHelper = new DbHelper();
     }
     public boolean isValidAdmin(String username, String password){

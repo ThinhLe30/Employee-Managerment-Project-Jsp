@@ -1,4 +1,4 @@
-package com.ngthvu.quanlynhanvienproject.repository;
+package com.ngthvu.quanlynhanvienproject.dao;
 
 import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.util.DbHelper;
@@ -9,12 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SalaryRepository {
+public class SalaryDAO {
     // represent DAO, contact with database in MySql,return Entity or List of Entity
     // do not contact from Controller to Repository
     // have to go through Service to Repository
     private DbHelper dbHelper;
-    public SalaryRepository(){
+    public SalaryDAO(){
         dbHelper = new DbHelper();
     }
     private static final String FIND_ALL_SALARY_BY_PAGE =

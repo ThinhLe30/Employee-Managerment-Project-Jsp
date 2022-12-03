@@ -1,7 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.controller.salaries;
 
 import com.ngthvu.quanlynhanvienproject.entity.Salary;
-import com.ngthvu.quanlynhanvienproject.service.SalaryService;
+import com.ngthvu.quanlynhanvienproject.bo.SalaryBO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -10,9 +10,9 @@ import java.io.IOException;
 
 @WebServlet(name = "SaveSalaryServlet", value = "/salary/save")
 public class SaveSalaryServlet extends HttpServlet {
-    private SalaryService salaryService;
+    private SalaryBO salaryBO;
     public void init(){
-        salaryService = new SalaryService();
+        salaryBO = new SalaryBO();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class SaveSalaryServlet extends HttpServlet {
         Float coefficient_pay = Float.parseFloat(request.getParameter("coefficient_pay"));
         Float coeficient_allowance = Float.parseFloat(request.getParameter("coefficient_allowance"));
         Salary salary = new Salary(id,basic_salary,coefficient_pay,coeficient_allowance);
-        salaryService.save(salary);
+        salaryBO.save(salary);
         response.sendRedirect(request.getContextPath()+"/salaries");
     }
 }

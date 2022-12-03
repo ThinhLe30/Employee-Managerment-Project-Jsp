@@ -1,8 +1,6 @@
-package com.ngthvu.quanlynhanvienproject.repository;
+package com.ngthvu.quanlynhanvienproject.dao;
 
 import com.ngthvu.quanlynhanvienproject.entity.Department;
-import com.ngthvu.quanlynhanvienproject.entity.Employee;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.util.DbHelper;
 
 import java.sql.PreparedStatement;
@@ -10,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class DepartmentRepository {
+public class DepartmentDAO {
     // represent DAO, contact with database in MySql,return Entity or List of Entity
     // do not contact from Controller to Repository
     // have to go through Service to Repository
@@ -30,7 +28,7 @@ public class DepartmentRepository {
             "where concat(name, ' ', address, ' ', phone_number, ' ', description) " +
             "like concat( '%',?,'%')";
 
-    public DepartmentRepository() {
+    public DepartmentDAO() {
         dbHelper = new DbHelper();
     }
     public List<Department> listByPage(Integer start, Integer numberPerPage, String keyword, String fieldName, String orderBy){

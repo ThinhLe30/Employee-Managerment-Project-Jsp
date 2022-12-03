@@ -1,32 +1,31 @@
-package com.ngthvu.quanlynhanvienproject.service;
+package com.ngthvu.quanlynhanvienproject.bo;
 
 import com.ngthvu.quanlynhanvienproject.entity.Admin;
 import com.ngthvu.quanlynhanvienproject.exception.AdminNotFoundException;
-import com.ngthvu.quanlynhanvienproject.repository.AdminRepository;
-import com.ngthvu.quanlynhanvienproject.repository.DepartmentRepository;
+import com.ngthvu.quanlynhanvienproject.dao.AdminDAO;
 
 import java.util.List;
 
-public class AdminService {
+public class AdminBO {
     // represent BO, contact with controller and Repository
-    private AdminRepository adminRepository;
-    public AdminService(){
-        adminRepository = new AdminRepository();
+    private AdminDAO adminDAO;
+    public AdminBO(){
+        adminDAO = new AdminDAO();
     }
     public boolean isValidAdmin(String username, String password){
-        return adminRepository.isValidAdmin(username,password);
+        return adminDAO.isValidAdmin(username,password);
     }
     public Admin findByUsernameAndPassword(String username, String password) {
-        return adminRepository.findByUsernameAndPassword(username,password);
+        return adminDAO.findByUsernameAndPassword(username,password);
     }
     public List<Admin> listByPage(Integer start, Integer numberPerPage, String keyword, String fieldName, String orderBy){
-        return adminRepository.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
+        return adminDAO.listByPage(start,numberPerPage,keyword,fieldName,orderBy);
     }
     public Integer countByKeyword(String keyword) {
-        return adminRepository.countByKeyword(keyword);
+        return adminDAO.countByKeyword(keyword);
     }
     public Admin findById(Integer id) throws AdminNotFoundException {
-        Admin admin = adminRepository.findById(id);
+        Admin admin = adminDAO.findById(id);
         if(admin == null){
             throw new AdminNotFoundException("Salary not found with id:" + id);
         }
@@ -34,16 +33,16 @@ public class AdminService {
     }
     public void save(Admin admin){
         if(admin.getId() == 0){
-            adminRepository.add(admin);
+            adminDAO.add(admin);
         }
         else{
-            adminRepository.update(admin);
+            adminDAO.update(admin);
         }
     }
     public void delete(Integer id) throws AdminNotFoundException {
-        if(adminRepository.findById(id) == null){
+        if(adminDAO.findById(id) == null){
             throw new AdminNotFoundException("Salary not found with id:" + id);
         }
-        adminRepository.delete(id);
+        adminDAO.delete(id);
     }
 }
