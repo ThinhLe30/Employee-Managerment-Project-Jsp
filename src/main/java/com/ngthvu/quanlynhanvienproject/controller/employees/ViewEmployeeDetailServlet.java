@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.controller.employees;
 
-import com.ngthvu.quanlynhanvienproject.entity.EmployeeView;
+import com.ngthvu.quanlynhanvienproject.bean.EmployeeView;
 import com.ngthvu.quanlynhanvienproject.exception.EmployeeNotFoundException;
 import com.ngthvu.quanlynhanvienproject.bo.EmployeeBO;
 
@@ -20,7 +20,6 @@ public class ViewEmployeeDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            System.out.println("ViewEmployeeDetailServlet");
             if (request.getParameter("id") != null) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 EmployeeView employeeView = employeeBO.getView(id);

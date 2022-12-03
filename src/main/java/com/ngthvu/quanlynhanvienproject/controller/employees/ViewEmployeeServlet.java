@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.controller.employees;
 
-import com.ngthvu.quanlynhanvienproject.entity.EmployeeView;
+import com.ngthvu.quanlynhanvienproject.bean.EmployeeView;
 import com.ngthvu.quanlynhanvienproject.bo.EmployeeBO;
 
 import javax.servlet.*;
@@ -20,7 +20,6 @@ public class ViewEmployeeServlet extends HttpServlet {
     // Controller, contact only with View and Service, do not linked Controller to Repository!
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getSession().getServletContext().getRealPath("/view/upload/"));
         Integer pageNum =1; // page thu 1 // currentPage
         String keyword ="";
         String orderBy = "asc";

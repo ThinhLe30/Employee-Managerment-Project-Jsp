@@ -1,4 +1,4 @@
-<%@ page import="com.ngthvu.quanlynhanvienproject.entity.EmployeeView" %>
+<%@ page import="com.ngthvu.quanlynhanvienproject.bean.EmployeeView" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.

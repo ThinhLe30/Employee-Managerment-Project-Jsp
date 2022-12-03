@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.controller.salaries;
 
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
+import com.ngthvu.quanlynhanvienproject.bean.Salary;
 import com.ngthvu.quanlynhanvienproject.exception.SalaryNotFoundException;
 import com.ngthvu.quanlynhanvienproject.bo.SalaryBO;
 

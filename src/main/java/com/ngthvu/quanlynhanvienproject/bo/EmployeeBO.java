@@ -1,7 +1,7 @@
 package com.ngthvu.quanlynhanvienproject.bo;
 
-import com.ngthvu.quanlynhanvienproject.entity.Employee;
-import com.ngthvu.quanlynhanvienproject.entity.EmployeeView;
+import com.ngthvu.quanlynhanvienproject.bean.Employee;
+import com.ngthvu.quanlynhanvienproject.bean.EmployeeView;
 import com.ngthvu.quanlynhanvienproject.exception.EmployeeNotFoundException;
 import com.ngthvu.quanlynhanvienproject.dao.EmployeeDAO;
 

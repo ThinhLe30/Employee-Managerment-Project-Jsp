@@ -1,4 +1,4 @@
-<%--<%@ page import="com.ngthvu.quanlynhanvienproject.entity.Employee" %>&lt;%&ndash;--%>
+<%--<%@ page import="com.ngthvu.quanlynhanvienproject.bean.Employee" %>&lt;%&ndash;--%>
 <%--  Created by IntelliJ IDEA.--%>
 <%--  User: Asus--%>
 <%--  Date: 11/24/2022--%>
@@ -111,10 +111,10 @@
 <%--    }--%>
 <%--</script>--%>
 <%--</html>--%>
-<%@ page import="com.ngthvu.quanlynhanvienproject.entity.EmployeeView" %>
+<%@ page import="com.ngthvu.quanlynhanvienproject.bean.EmployeeView" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ngthvu.quanlynhanvienproject.entity.Salary" %>
+<%@ page import="com.ngthvu.quanlynhanvienproject.bean.Salary" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>

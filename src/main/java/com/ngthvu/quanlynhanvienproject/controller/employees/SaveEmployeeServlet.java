@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.controller.employees;
 
-import com.ngthvu.quanlynhanvienproject.entity.Employee;
+import com.ngthvu.quanlynhanvienproject.bean.Employee;
 import com.ngthvu.quanlynhanvienproject.exception.EmployeeNotFoundException;
 import com.ngthvu.quanlynhanvienproject.bo.EmployeeBO;
 

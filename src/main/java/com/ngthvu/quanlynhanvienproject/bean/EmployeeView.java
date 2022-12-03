@@ -1,8 +1,8 @@
-package com.ngthvu.quanlynhanvienproject.entity;
+package com.ngthvu.quanlynhanvienproject.bean;
 
 import java.util.Date;
 
-public class Employee {
+public class EmployeeView {
     private Integer id;
     private String firstName;
     private String lastName;
@@ -12,11 +12,10 @@ public class Employee {
     private Integer gender;
     private String phone;
     private String image;
-    private Integer id_department;
-    private Integer id_salary;
+    private String departmentName;
+    private Float basicSalary;
 
-    public Employee(Integer id, String firstName, String lastName, String email, Date birthday, String address,
-                    Integer gender, String phone, String image, Integer id_department, Integer id_salary) {
+    public EmployeeView(Integer id, String firstName, String lastName, String email, Date birthday, String address, Integer gender, String phone, String image, String departmentName, Float basicSalary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,11 +25,11 @@ public class Employee {
         this.gender = gender;
         this.phone = phone;
         this.image = image;
-        this.id_department = id_department;
-        this.id_salary = id_salary;
+        this.departmentName = departmentName;
+        this.basicSalary = basicSalary;
     }
 
-    public Employee() {
+    public EmployeeView() {
         this.id = 0;
     }
 
@@ -66,6 +65,14 @@ public class Employee {
         this.email = email;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -98,32 +105,32 @@ public class Employee {
         this.image = image;
     }
 
-    public Integer getId_department() {
-        return id_department;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setId_department(Integer id_department) {
-        this.id_department = id_department;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public Integer getId_salary() {
-        return id_salary;
+    public Float getBasicSalary() {
+        return basicSalary;
     }
 
-    public void setId_salary(Integer id_salary) {
-        this.id_salary = id_salary;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBasicSalary(Float basicSalary) {
+        this.basicSalary = basicSalary;
     }
 
     @Override
-    public String toString(){
-        return this.firstName + " " + this.lastName;
+    public String toString() {
+        return this.getFirstName() + " " + this.getLastName();
+    }
+
+    public String getInfo() {
+        return this.getFirstName() + " " + this.getLastName()
+                + "/" + this.getEmail() + "/" + this.getBirthday()
+                + "/" + this.getAddress() + "/" + this.getGender()
+                + "/" + this.getPhone() + "/" + this.getImage()
+                + "/" + this.getDepartmentName() + "/" + this.getBasicSalary();
     }
 }

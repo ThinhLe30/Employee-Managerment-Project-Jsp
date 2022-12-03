@@ -1,4 +1,4 @@
-package com.ngthvu.quanlynhanvienproject.entity;
+package com.ngthvu.quanlynhanvienproject.bean;
 
 public class Salary {
     private Integer id;

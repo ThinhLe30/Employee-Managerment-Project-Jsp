@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.dao;
 
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
+import com.ngthvu.quanlynhanvienproject.bean.Salary;
 import com.ngthvu.quanlynhanvienproject.util.DbHelper;
 
 import java.sql.PreparedStatement;

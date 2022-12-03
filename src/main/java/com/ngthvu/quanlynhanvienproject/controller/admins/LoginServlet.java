@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.controller.admins;
 
-import com.ngthvu.quanlynhanvienproject.entity.Admin;
+import com.ngthvu.quanlynhanvienproject.bean.Admin;
 import com.ngthvu.quanlynhanvienproject.bo.AdminBO;
 
 import javax.servlet.*;

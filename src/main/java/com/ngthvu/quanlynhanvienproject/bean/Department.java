@@ -1,4 +1,4 @@
-package com.ngthvu.quanlynhanvienproject.entity;
+package com.ngthvu.quanlynhanvienproject.bean;
 
 public class Department {
     private Integer id;

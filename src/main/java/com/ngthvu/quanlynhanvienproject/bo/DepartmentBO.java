@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.bo;
 
-import com.ngthvu.quanlynhanvienproject.entity.Department;
+import com.ngthvu.quanlynhanvienproject.bean.Department;
 import com.ngthvu.quanlynhanvienproject.exception.DepartmentNotFoundException;
 import com.ngthvu.quanlynhanvienproject.dao.DepartmentDAO;
 

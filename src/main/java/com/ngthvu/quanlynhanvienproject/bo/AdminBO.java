@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.bo;
 
-import com.ngthvu.quanlynhanvienproject.entity.Admin;
+import com.ngthvu.quanlynhanvienproject.bean.Admin;
 import com.ngthvu.quanlynhanvienproject.exception.AdminNotFoundException;
 import com.ngthvu.quanlynhanvienproject.dao.AdminDAO;
 

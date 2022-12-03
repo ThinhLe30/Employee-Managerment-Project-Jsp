@@ -1,6 +1,4 @@
-import com.ngthvu.quanlynhanvienproject.entity.Department;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.ngthvu.quanlynhanvienproject.bean.Department;
 
 class TestDepartmentsTest extends Department {
 

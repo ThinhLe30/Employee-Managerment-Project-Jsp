@@ -1,6 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.controller.departments;
 
-import com.ngthvu.quanlynhanvienproject.entity.Department;
+import com.ngthvu.quanlynhanvienproject.bean.Department;
 import com.ngthvu.quanlynhanvienproject.bo.DepartmentBO;
 
 import javax.servlet.*;

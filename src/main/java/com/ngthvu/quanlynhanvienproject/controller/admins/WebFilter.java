@@ -1,9 +1,8 @@
 package com.ngthvu.quanlynhanvienproject.controller.admins;
 
-import com.ngthvu.quanlynhanvienproject.entity.Admin;
+import com.ngthvu.quanlynhanvienproject.bean.Admin;
 
 import javax.servlet.*;
-import javax.servlet.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

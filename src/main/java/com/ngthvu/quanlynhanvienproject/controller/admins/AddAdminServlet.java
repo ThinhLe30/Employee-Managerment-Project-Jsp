@@ -1,7 +1,6 @@
 package com.ngthvu.quanlynhanvienproject.controller.admins;
 
-import com.ngthvu.quanlynhanvienproject.entity.Admin;
-import com.ngthvu.quanlynhanvienproject.entity.Salary;
+import com.ngthvu.quanlynhanvienproject.bean.Admin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
