@@ -39,7 +39,7 @@
             <span>500 error </span>
             <h2>Something went wrong.</h2>
             <p>Please try again, or contact support.</p>
-            <a class="error-btn-homepage">Home page</a>
+            <a class="error-btn-homepage" href="${pageContext.request.contextPath}/home">Home page</a>
         </div>
         <div class="error-img">
             <img src="${pageContext.request.contextPath}/view/img/error/500error.svg" />

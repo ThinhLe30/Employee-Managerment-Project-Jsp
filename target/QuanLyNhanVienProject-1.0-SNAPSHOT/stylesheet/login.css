@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
 
-*,
-*::after,
-*::before {
+*{
   padding: 0;
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -129,10 +127,12 @@ button {
   border-radius: 18px;
 }
 .btn-log-in.btn-continue-as-guess{
+  text-decoration: none;
   background-color: #6c7d9c!important;
 }
 .btn-log-in.btn-continue-as-guess:hover{
-  background-color: #4dabf7!important;
+  color: #ffffff;
+  background-color: #9ea8bb !important;
 }
 .btn-log-in:hover {
   background-color: #4dabf7;

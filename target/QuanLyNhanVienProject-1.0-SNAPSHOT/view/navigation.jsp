@@ -2,7 +2,7 @@
 <div class="side">
     <div class="title">
         <img src="${pageContext.request.contextPath}/view/img/logo/office.png" alt="" />
-        <p>Management</p>
+        <a class="nav-text" href="${pageContext.request.contextPath}/home"><p>Management</p></a>
     </div>
     <ul class="navigation">
         <c:if test = "${not empty sessionScope.admin}">

@@ -63,7 +63,7 @@
                 />
             </div>
         </label>
-        <a href="home" class="btn-log-in btn-continue-as-guess">Continue as guess</a>
+        <a class="btn-log-in btn-continue-as-guess text-center" href="${pageContext.request.contextPath}/home">Continue as guess</a>
         <button type="submit" class="btn-log-in">Login</button>
     </form>
 </div>

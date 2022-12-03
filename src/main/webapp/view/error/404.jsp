@@ -46,7 +46,7 @@
                 <li>a <strong>mistyped address.</strong></li>
                 <li>you have <strong>no access</strong> to this page (login to continue).</li>
             </ul>
-            <a class="error-btn-homepage">Home page</a>
+            <a class="error-btn-homepage" href="${pageContext.request.contextPath}/home">Home page</a>
         </div>
         <div class="error-img">
             <img src="${pageContext.request.contextPath}/view/img/error/404error.svg" />
