@@ -25,6 +25,9 @@ public class WebFilter implements Filter {
         boolean check = true;
         Admin admin = (Admin) session.getAttribute("admin");
         if(admin == null || session == null){
+            // o lai de tau kiem tra
+            // /employees, /admins, /departments, /salaries,
+             // /add,/update, /delete
             for (String action : actions) {
                 if(url.contains(action)){
                     check = false;
@@ -38,6 +41,7 @@ public class WebFilter implements Filter {
         }
         else{
             chain.doFilter(request, response);
+            // m cu tiep tuc chay di. /employees
         }
 
     }

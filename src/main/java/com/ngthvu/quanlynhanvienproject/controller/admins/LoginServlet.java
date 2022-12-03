@@ -27,7 +27,6 @@ public class LoginServlet extends HttpServlet {
             // success
             HttpSession session=request.getSession();
             Admin admin = adminBO.findByUsernameAndPassword(username,password);
-            System.out.println(admin);
             session.setAttribute("admin", admin);
             response.sendRedirect(request.getContextPath()+"/home");
         }
