@@ -29,6 +29,9 @@ public class AdminDAO {
     private static final String  FIND_BY_ID =
             "select * from employee_management.admin" +
                     " where id = ?";
+    private static final String  FIND_BY_USERNAME =
+            "select * from employee_management.admin" +
+                    " where username = ?";
     private static final String  INSERT =
             "insert into employee_management.admin" +
                     " (username,password,first_name,last_name,phone)" +
@@ -172,4 +175,38 @@ public class AdminDAO {
         }
     }
 
+    public String checkDuplicateUsername(Integer id, String username) {
+        Admin admin = findByUsername(username); // in db
+        if(admin == null){
+            // ko co ai sd
+            return "OK";
+        }
+        else{
+            // neu co roi, minh dang edit, ma minh giu nguyen username
+            if(admin.getId() == id){
+                return "OK";
+            }
+        }
+        return "Duplicate";
+    }
+
+    private Admin findByUsername(String username) {
+        Admin admin = null;
+        try {
+            PreparedStatement preparedStatement = dbHelper.getConnection().prepareStatement(FIND_BY_USERNAME);
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                String password = rs.getString("password");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String phone = rs.getString("phone");
+                admin = new Admin(id,username,password,firstName,lastName,phone);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return admin;
+    }
 }

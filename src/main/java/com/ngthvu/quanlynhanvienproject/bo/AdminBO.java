@@ -45,4 +45,8 @@ public class AdminBO {
         }
         adminDAO.delete(id);
     }
+
+    public String checkDuplicateUsername(Integer id, String username) {
+        return adminDAO.checkDuplicateUsername(id,username);
+    }
 }

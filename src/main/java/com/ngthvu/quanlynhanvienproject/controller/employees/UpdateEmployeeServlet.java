@@ -49,7 +49,6 @@ public class UpdateEmployeeServlet extends HttpServlet {
             request.setAttribute("error", e.getMessage());
             rdError.forward(request, response);
         }
-
     }
 
     @Override

@@ -45,8 +45,9 @@
         </div>
         <form name="admin_form" class="form"
               method="post" action="${pageContext.request.contextPath}/admin/save"
-              style="max-width: 700px; margin: 0 auto">
-            <input type="hidden" value="${admin.id}" name="id">
+              style="max-width: 700px; margin: 0 auto"
+              onsubmit="return checkDuplicateUsername(this);"  >
+            <input type="hidden" value="${admin.id}" name="id" id="id">
             <label for="name" class="label-input">
                 <span class="input-span">Username</span>
                 <div class="input-container">
@@ -149,6 +150,36 @@
         </form>
 </div>
 </div>
+<div id="infoModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title text-danger">Duplicate Username found</h4>
+                    <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-hidden="true"
+                    >
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Either pick a new username or have the User with the existing username change theirs</p>
+                </div>
+                <div class="modal-footer">
+                    <input
+                            type="button"
+                            class="btn btn-default"
+                            data-dismiss="modal"
+                            value="Cancel"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
     function checkPasswordMatch(confirmPassword){
         if (confirmPassword.value != $("#password").val()) {
@@ -156,6 +187,24 @@
         } else {
             confirmPassword.setCustomValidity("");
         }
+    }
+    function checkDuplicateUsername(form){
+        $.ajax({
+            method: "POST",
+            url: "${pageContext.request.contextPath}/checkDuplicateUsername",
+            data: {
+                username : $("#name").val(),
+                id : $("#id").val()
+            },
+            success: function(response) {
+                if (response == "OK") {
+                    form.submit();
+                } else if (response == "Duplicate") {
+                    $("#infoModal").modal();
+                }
+            }
+        });
+        return false;
     }
 </script>
 </body>

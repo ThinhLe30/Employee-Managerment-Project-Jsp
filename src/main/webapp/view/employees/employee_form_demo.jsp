@@ -228,6 +228,36 @@
         </form>
     </div>
 </div>
+<div id="infoModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title text-danger">Duplicate Phone and Email found</h4>
+                    <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-hidden="true"
+                    >
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="message"></p>
+                </div>
+                <div class="modal-footer">
+                    <input
+                            type="button"
+                            class="btn btn-default"
+                            data-dismiss="modal"
+                            value="Cancel"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 
 <script>
@@ -245,7 +275,8 @@
                     form.submit();
                     return true;
                 } else {
-                    alert(response);
+                    $("#message").text(response);
+                    $("#infoModal").modal();
                     return false;
                 }
             },
