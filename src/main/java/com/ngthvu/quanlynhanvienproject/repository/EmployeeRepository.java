@@ -6,10 +6,7 @@ import com.ngthvu.quanlynhanvienproject.entity.EmployeeView;
 import com.ngthvu.quanlynhanvienproject.entity.Salary;
 import com.ngthvu.quanlynhanvienproject.util.DbHelper;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,14 +44,14 @@ public class EmployeeRepository {
                     " left join (select id as depID, name from departments) dep on id_department = depID " +
                     " left join (select id as salID,basic_salary from level_salaries) sal on id_level_salary = salID" +
                     " WHERE concat (first_name, ' ', last_name, ' ', email, ' ', birthday,' ',address, ' '," +
-                    " phone_number, ' ', COALESCE (name, ''), ' ', COALESCE (basic_salary, ''))" +
+                    " phone_number, ' ', COALESCE (name, 'None'), ' ', COALESCE (basic_salary, 'None'))" +
                     " like concat( '%',?,'%')";
     private static final String LIST_BY_PAGE =
             "select * from employees" +
                     " left join (select id as depID, name from departments) dep on id_department = depID " +
                     " left join (select id as salID,basic_salary from level_salaries) sal on id_level_salary = salID" +
                     " WHERE concat (first_name, ' ', last_name, ' ', email, ' ', birthday,' ',address, ' '," +
-                    " phone_number, ' ', COALESCE (name, ''), ' ', COALESCE (basic_salary, ''))" +
+                    " phone_number, ' ', COALESCE (name, 'None'), ' ', COALESCE (basic_salary, 'None'))" +
                     " like concat( '%',?,'%')";
 
     private static final String CHECK_DUPLICATE_EMAIL =
@@ -70,9 +67,10 @@ public class EmployeeRepository {
     }
 
     public Integer countByKeyword(String keyword) {
+        Connection connection = dbHelper.getConnection();
         Integer count = 0;
         try {
-            PreparedStatement preparedStatement = dbHelper.getConnection().prepareStatement(COUNT_BY_KEYWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(COUNT_BY_KEYWORD);
             preparedStatement.setString(1,keyword);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -80,14 +78,19 @@ public class EmployeeRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return count;
     }
 
     public List<EmployeeView> listByPage(Integer start, Integer numberPerPage, String keyword, String fieldName, String orderBy){
         List<EmployeeView> employeeViews = new ArrayList<>();
+        Connection connection = dbHelper.getConnection();
         try {
-            PreparedStatement preparedStatement = dbHelper.getConnection().prepareStatement(LIST_BY_PAGE + " order by "+fieldName+" "+orderBy+" limit ?,?");
+            PreparedStatement preparedStatement = connection.prepareStatement(LIST_BY_PAGE + " order by "+fieldName+" "+orderBy+" limit ?,?");
             preparedStatement.setString(1,keyword);
             preparedStatement.setInt(2,start-1);
             preparedStatement.setInt(3,numberPerPage);
@@ -123,17 +126,26 @@ public class EmployeeRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return employeeViews;
     }
 
     public ArrayList<Employee> getAll() {
+        Connection connection = dbHelper.getConnection();
         ArrayList<Employee> employees = new ArrayList<Employee>();
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(GET_ALL_EMPLOYEES);
+            PreparedStatement ps = connection.prepareStatement(GET_ALL_EMPLOYEES);
             listEmployee(employees, ps);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return employees;
     }
@@ -167,13 +179,18 @@ public class EmployeeRepository {
 //    }
 
     public ArrayList<Employee> search(String keyword) {
+        Connection connection = dbHelper.getConnection();
         ArrayList<Employee> employees = new ArrayList<>();
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(SEARCH_EMPLOYEE);
+            PreparedStatement ps = connection.prepareStatement(SEARCH_EMPLOYEE);
             ps.setString(1, "%" + keyword + "%");
             listEmployee(employees, ps);
         } catch (Exception e) {
                 e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return employees;
     }
@@ -202,84 +219,115 @@ public class EmployeeRepository {
 
     //Get employeeView by ID
     public EmployeeView getView(Integer id) {
+        Connection connection = dbHelper.getConnection();
         EmployeeView employeeView = new EmployeeView();
         try {
             String GET_EMPLOYEE_ID = GET_EMPLOYEE.replace("key", "id");
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(GET_EMPLOYEE_ID);
+            PreparedStatement ps = connection.prepareStatement(GET_EMPLOYEE_ID);
             ps.setInt(1, id);
             setEmployeeView(employeeView, ps);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return employeeView;
     }
 
     //Get employee by ID
     public Employee get(Integer id) {
+        Connection connection = dbHelper.getConnection();
         Employee employee = new Employee();
         try {
             String GET_EMPLOYEE_ID = GET_EMPLOYEE.replace("key", "id");
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(GET_EMPLOYEE_ID);
+            PreparedStatement ps = connection.prepareStatement(GET_EMPLOYEE_ID);
             ps.setInt(1, id);
             setEmployee(employee, ps);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return employee;
     }
 
     //Get employee by type
     public Employee get(String type, String value) {
+        Connection connection = dbHelper.getConnection();
         Employee employee = new Employee();
         String GET_EMPLOYEE_TYPE = GET_EMPLOYEE.replace("key", type);
         System.out.println(GET_EMPLOYEE_TYPE);
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(GET_EMPLOYEE_TYPE);
+            PreparedStatement ps = connection.prepareStatement(GET_EMPLOYEE_TYPE);
             ps.setString(1, value);
             setEmployee(employee, ps);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return employee;
     }
 
     //Get EmployeeView by type
     public EmployeeView getView(String type, String value) {
+        Connection connection = dbHelper.getConnection();
         EmployeeView employeeView = new EmployeeView();
         String GET_EMPLOYEE_TYPE = GET_EMPLOYEE.replace("key", type);
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(GET_EMPLOYEE_TYPE);
+            PreparedStatement ps = connection.prepareStatement(GET_EMPLOYEE_TYPE);
             ps.setString(1, value);
             setEmployeeView(employeeView, ps);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return employeeView;
     }
 
     //Add new employee
     public void add(Employee employee) {
+        Connection connection = dbHelper.getConnection();
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(INSERT_EMPLOYEE);
+            PreparedStatement ps = connection.prepareStatement(INSERT_EMPLOYEE);
             addUpdate(employee, ps);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
     }
 
     public void update(Employee employee) {
+        Connection connection = dbHelper.getConnection();
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(UPDATE_EMPLOYEE);
+            PreparedStatement ps = connection.prepareStatement(UPDATE_EMPLOYEE);
             addUpdate(employee, ps);
             ps.setInt(11, employee.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
     }
 
     private void addUpdate(Employee employee, PreparedStatement ps) throws SQLException {
+
         ps.setString(1, employee.getFirstName());
         ps.setString(2, employee.getLastName());
         ps.setString(3, employee.getEmail());
@@ -304,12 +352,17 @@ public class EmployeeRepository {
     }
 
     public void delete(Integer id) {
+        Connection connection = dbHelper.getConnection();
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(DELETE_EMPLOYEE);
+            PreparedStatement ps = connection.prepareStatement(DELETE_EMPLOYEE);
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
     }
 
@@ -360,8 +413,9 @@ public class EmployeeRepository {
     }
 
     public String checkDuplicateEmail(Integer id, String email) {
+        Connection connection = dbHelper.getConnection();
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(CHECK_DUPLICATE_EMAIL);
+            PreparedStatement ps = connection.prepareStatement(CHECK_DUPLICATE_EMAIL);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -382,13 +436,18 @@ public class EmployeeRepository {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return "OK";
     }
 
     public String checkDuplicatePhone(Integer id, String phone) {
+        Connection connection = dbHelper.getConnection();
         try {
-            PreparedStatement ps = dbHelper.getConnection().prepareStatement(CHECK_DUPLICATE_PHONE);
+            PreparedStatement ps = connection.prepareStatement(CHECK_DUPLICATE_PHONE);
             ps.setString(1, phone);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -409,6 +468,10 @@ public class EmployeeRepository {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null){
+                try { connection.close(); } catch (SQLException ignore) {}
+            }
         }
         return "OK";
     }

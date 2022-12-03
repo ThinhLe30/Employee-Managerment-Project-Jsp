@@ -41,6 +41,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
             request.setAttribute("departments", departments);
             request.setAttribute("salaries", salaries);
             request.setAttribute("employee", employee);
+            request.setAttribute("pageTitle", "Update Employee");
             RequestDispatcher rd = request.getRequestDispatcher("/view/employees/employee_form_demo.jsp");
             rd.forward(request, response);
         } catch (EmployeeNotFoundException e) {

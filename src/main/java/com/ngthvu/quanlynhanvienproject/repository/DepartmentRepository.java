@@ -15,7 +15,7 @@ public class DepartmentRepository {
     // do not contact from Controller to Repository
     // have to go through Service to Repository
     private DbHelper dbHelper;
-    private static final String GET_ALL_DEPARTMENTS = "select * from departments";
+    private static final String GET_ALL_DEPARTMENTS = "select * from departments order by name asc";
     private static final String GET_DEPARTMENT = "select * from departments where key = ?";
     private static final String INSERT_DEPARTMENT = "insert into departments (name, address, phone_number, description) " +
             "values (?,?,?,?)";

@@ -15,7 +15,7 @@ public class ViewSalaryServlet extends HttpServlet {
     public void init(){
         salaryService = new SalaryService();
     }
-    private static final Integer NUMBER_SALARY_PER_PAGE = 8;
+    private static final Integer NUMBER_SALARY_PER_PAGE = 11;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer pageNum =1; // page thu 1 // currentPage

@@ -41,6 +41,7 @@
 <div class="container">
     <jsp:include page="/view/navigation.jsp"></jsp:include>
     <div class="container_form">
+        <br><br>
         <div>
             <h2 class="text-center">${pageTitle}</h2>
         </div>
@@ -217,7 +218,7 @@
                             <option value="0" selected}>None</option>
                         </c:if>
                         <c:forEach items="${salaries}" var="salary">
-                            <option value="${salary.id}" ${employee.id_salary == salary.id ? "selected" : ""}>${salary.basicSalary}</option>
+                            <option value="${salary.id}" ${employee.id_salary == salary.id ? "selected" : ""}>$${salary.basicSalary}</option>
                         </c:forEach>
                     </select>
                 </div>

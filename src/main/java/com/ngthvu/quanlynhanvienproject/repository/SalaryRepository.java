@@ -22,7 +22,7 @@ public class SalaryRepository {
                     "where concat(basic_salary, '' , coefficient_pay, ' ', coeficient_allowance) " +
                     "like concat( '%',?,'%')";
     private static final String FIND_ALL =
-            "select * from employee_management.level_salaries";
+            "select * from employee_management.level_salaries order by basic_salary asc";
     private static final String  FIND_BY_ID =
             "select * from employee_management.level_salaries " +
                     "where id = ?";

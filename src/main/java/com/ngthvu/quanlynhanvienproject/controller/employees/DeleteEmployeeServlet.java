@@ -22,7 +22,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
             employeeService.delete(id);
-            response.sendRedirect("/employees");
+            response.sendRedirect(request.getContextPath()+"/employees");
         } catch (EmployeeNotFoundException e) {
             e.printStackTrace();
             RequestDispatcher rdError = request.getRequestDispatcher("view/error/404.jsp");
